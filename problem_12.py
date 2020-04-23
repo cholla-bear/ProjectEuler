@@ -27,3 +27,4 @@ n = 1
 while(num_factors_tri(n) <= 500):
   n += 1
 print(tri(n))
+print(n)
