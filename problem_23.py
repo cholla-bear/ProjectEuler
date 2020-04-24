@@ -15,11 +15,9 @@ for i, a1 in enumerate(abundant_nums):
     if a1 + a2 < sum_abundant.shape[0]:
       sum_abundant[a1 + a2] = True
 
-print(sum_abundant[:30])
-
 s = 0
 for n, is_sum in enumerate(sum_abundant):
   if not is_sum:
     s += n
 
-print(n)
+print(s)
