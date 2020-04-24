@@ -3,7 +3,6 @@ from functools import lru_cache
 
 amicable_numbers = []
 
-@lru_cache(maxsize=None)
 def sum_proper_divisors(n):
   return sum(prime.proper_divisors(n))
 
