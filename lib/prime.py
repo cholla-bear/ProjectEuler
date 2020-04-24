@@ -5,7 +5,7 @@ from math import sqrt
 from functools import lru_cache, reduce
 from operator import mul
 
-@lru_cache
+@lru_cache(maxsize=None)
 def prime_factors(n):
   '''Returns a dictionary of prime factors with their counts'''
   prime_factors = defaultdict(int)
