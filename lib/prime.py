@@ -1,7 +1,9 @@
 from collections import defaultdict
+import itertools
 from itertools import takewhile, islice
 from math import sqrt
-from functools import lru_cache
+from functools import lru_cache, reduce
+from operator import mul
 
 @lru_cache
 def prime_factors(n):
@@ -24,6 +26,21 @@ def prime_factors(n):
 
   return prime_factors
 
+def proper_divisors(n):
+  '''Return a list of divisors of n, including 1 but excluding n'''
+  if n == 0:
+    raise ValueError
+  if n == 1:
+    return [1]
+  pf = prime_factors(n)
+  raised_factors = []
+  for factor, power in pf.items():
+    raised_factors.append([factor**n for n in range(power+1)])
+  factor_components = itertools.product(*raised_factors)
+  proper_divisors = [reduce(mul, xs) for xs in factor_components]
+  proper_divisors.remove(n)
+  return proper_divisors
+
 def take_primes(n):
   '''Returns a list of the first n primes'''
   return list(islice(primes(), n))
@@ -38,4 +55,3 @@ def primes():
       known_primes.append(test_num)
       yield test_num
     test_num += 1
-
