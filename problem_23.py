@@ -12,6 +12,14 @@ sum_abundant = np.zeros(28123, dtype=bool)
 for i, a1 in enumerate(abundant_nums):
   for j in range(i, len(abundant_nums)):
     a2 = abundant_nums[j]
-    sum_abundant[a1 + a2] = True
+    if a1 + a2 < sum_abundant.shape[0]:
+      sum_abundant[a1 + a2] = True
 
 print(sum_abundant[:30])
+
+s = 0
+for n, is_sum in enumerate(sum_abundant):
+  if not is_sum:
+    s += n
+
+print(n)
