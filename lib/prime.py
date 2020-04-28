@@ -48,10 +48,25 @@ def take_primes(n):
 def primes():
   '''Return a generator of prime numbers'''
   known_primes = []
-  test_num = 2
+  yield 2
+  test_num = 3
   while True:
     filtered_primes = takewhile(lambda x: x <= sqrt(test_num), known_primes)
     if not any(test_num % p == 0 for p in filtered_primes):
       known_primes.append(test_num)
       yield test_num
-    test_num += 1
+    test_num += 2
+
+@lru_cache(maxsize=None)
+def is_prime(n):
+  if n <= 1:
+    return False
+  elif n == 2:
+    return True
+  elif n % 2 == 0:
+    return False
+  else:
+    for trial_divisor in range(3, int(sqrt(n)) + 1, 2):
+      if n % trial_divisor == 0:
+        return False
+  return True
