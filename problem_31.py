@@ -1,9 +1,9 @@
 coin_values = [1, 2, 5, 10, 20, 50, 100, 200]
 
 def fill(value, available_coins):
-  if len(available_coins) == 0:
-    return 0
   coin_value = available_coins[0]
+  if coin_value == 1:
+    return 1 # only one way to finish
   max_count = int(value/coin_value)
   found_ways = 0
   for n in range(max_count + 1):
