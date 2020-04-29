@@ -1,5 +1,8 @@
+from functools import lru_cache
+
 coin_values = [1, 2, 5, 10, 20, 50, 100, 200]
 
+@lru_cache(maxsize=None)
 def fill(value, available_coins):
   coin_value = available_coins[0]
   if coin_value == 1:
@@ -14,4 +17,4 @@ def fill(value, available_coins):
       found_ways += fill(remaining_value, available_coins[1:])
   return found_ways
 
-print(fill(200, list(reversed(coin_values))))
+print(fill(200, tuple(reversed(coin_values))))
