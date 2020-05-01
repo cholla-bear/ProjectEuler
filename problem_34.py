@@ -16,15 +16,11 @@ def max_num_digits():
 def upper_bound():
   return max_num_digits()*factorial(9)
 
-@lru_cache(maxsize=None)
-def sum_of_factorials(digits):
-  return sum([factorials[d] for d in digits])
-
 def factorial_of_digits():
   expressible = []
   for n in range(3, upper_bound()):
     digits = [int(d) for d in str(n)]
-    sum_facts = sum_of_factorials(tuple(sorted(digits)))
+    sum_facts = sum([factorials[d] for d in digits])
     if n == sum_facts:
       expressible.append(n)
   return expressible
