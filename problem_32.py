@@ -8,22 +8,30 @@ pandigital_products = set()
 # We see that if i*j == k then:
 # digits(k) >= digits(i) + digits(j) - 1
 # Since i >= 10^(digits(i) - 1)
-# So making a table of digits(j) required to
-# get digits(i) + digits(j) + digits(k) >= 9:
+# So making a table:
+# digits(i) + digits(j) + digits(k) >= 9:
 #        1           4           4
 #        2           3           4
 #        3           2           4
 # We'll catch all the valid combinations with
-# 2-digit i and 4-digit j
+# 2-digit i and 4-digit k
 
 for i in range(1, 100):
-  if i < 10:
-    # 1-digit times 4-digit
-    upper_bound = 10000
-  else:
-    # 2-digit times 3-digit
-    upper_bound = 1000
-  for j in range(i + 1, upper_bound):
+
+  # Compute an upper bound for j based on the fact that k
+  # is always 4 digits, and constructing the biggest possible
+  # k given the digits not included in i
+  remaining_digits = numerals - set(str(i))
+
+  biggest_4 = sorted(list(remaining_digits), reverse=True)[:4]
+  biggest_k = sum([int(d)*10**i for i, d in enumerate(reversed(biggest_4))])
+  upper_bound = ceil(biggest_k / i)
+
+  lowest_4 = sorted(list(remaining_digits))[:4]
+  lowest_k = sum([int(d)*10**i for i, d in enumerate(reversed(lowest_4))])
+  lower_bound = int(lowest_k / i)
+
+  for j in range(lower_bound, upper_bound):
     k = i*j
     digits = str(i) + str(j) + str(k)
     if len(digits) == 9 and set(digits) == numerals:
