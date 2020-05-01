@@ -8,6 +8,7 @@ from operator import mul
 @lru_cache(maxsize=None)
 def prime_factors(n):
   '''Returns a dictionary of prime factors with their counts'''
+
   prime_factors = defaultdict(int)
 
   while n % 2 == 0:
