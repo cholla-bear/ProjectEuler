@@ -5,7 +5,7 @@ from operator import mul, concat
 def reduce_correctly(n, d):
   if n == 0:
     return (0, 1)
-  # Have to copy for the LRU cache
+  # Have to copy for the LRU cache (damn mutability)
   n_factors = prime_factors(n).copy()
   d_factors = prime_factors(d).copy()
   for factor, n_count in n_factors.items():
