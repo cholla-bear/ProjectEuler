@@ -52,7 +52,8 @@ def primes():
   yield 2
   test_num = 3
   while True:
-    filtered_primes = takewhile(lambda x: x <= sqrt(test_num), known_primes)
+    limit = sqrt(test_num)
+    filtered_primes = takewhile(lambda x: x <= limit, known_primes)
     if not any(test_num % p == 0 for p in filtered_primes):
       known_primes.append(test_num)
       yield test_num
