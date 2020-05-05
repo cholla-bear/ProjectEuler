@@ -72,3 +72,8 @@ def is_prime(n):
       if n % trial_divisor == 0:
         return False
   return True
+
+def relatively_prime(a, b):
+  prime_factors_a = prime_factors(a)
+  prime_factors_b = prime_factors(b)
+  return set(prime_factors_a).isdisjoint(set(prime_factors_b))
