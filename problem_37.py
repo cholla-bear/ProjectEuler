@@ -25,7 +25,9 @@ def truncatable_primes():
 
   def extend_truncatable(p):
     extended_primes = list(filter(is_prime, [10*p + digit for digit in odd_digits]))
-    return list(filter(is_truncatable, extended_primes)) + reduce(concat, [extend_truncatable(p) for p in extended_primes], [])
+    truncatable = list(filter(is_truncatable, extended_primes))
+    subproblem_solutions = [extend_truncatable(p) for p in extended_primes]
+    return truncatable + reduce(concat, subproblem_solutions, [])
 
   return reduce(concat, [extend_truncatable(p) for p in one_digit_primes], [])
 
