@@ -1,4 +1,6 @@
 from lib.prime import is_prime, primes
+from operator import concat
+from functools import reduce
 
 def truncatable_primes_brutal():
   for p in primes():
@@ -21,18 +23,11 @@ def truncatable_primes():
   one_digit_primes = [2,3,5,7]
   odd_digits = [1,3,5,7,9]
 
-  def extend_truncatable(p, truncatable):
-    for digit in odd_digits:
-      trial_p = 10*p + digit
-      if is_prime(trial_p):
-        if is_truncatable(trial_p):
-          truncatable.append(trial_p)
-        extend_truncatable(trial_p, truncatable)
-  
-  truncatable = []
-  for p in one_digit_primes:
-    extend_truncatable(p, truncatable)
-  return truncatable
+  def extend_truncatable(p):
+    extended_primes = list(filter(is_prime, [10*p + digit for digit in odd_digits]))
+    return list(filter(is_truncatable, extended_primes)) + reduce(concat, [extend_truncatable(p) for p in extended_primes], [])
+
+  return reduce(concat, [extend_truncatable(p) for p in one_digit_primes], [])
 
 trunc = truncatable_primes()
 print(trunc)
