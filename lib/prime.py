@@ -4,6 +4,7 @@ from itertools import takewhile, islice
 from math import sqrt
 from functools import lru_cache, reduce
 from operator import mul
+import numpy as np
 
 @lru_cache(maxsize=None)
 def prime_factors(n):
@@ -77,3 +78,13 @@ def relatively_prime(a, b):
   prime_factors_a = prime_factors(a)
   prime_factors_b = prime_factors(b)
   return set(prime_factors_a).isdisjoint(set(prime_factors_b))
+
+def sieve(n):
+  # Help from here: 
+  # https://stackoverflow.com/questions/49936222/an-efficient-sieve-of-eratosthenes-in-python
+  flags = np.ones(n, dtype=bool)
+  flags[0] = flags[1] = False
+  for i in range(2, int(sqrt(n)) + 1):
+    if flags[i]:
+      flags[i*i::i] = False
+  return np.flatnonzero(flags)

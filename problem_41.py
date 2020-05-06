@@ -1,4 +1,4 @@
-from lib.prime import primes, is_prime
+from lib.prime import primes, is_prime, sieve
 from itertools import takewhile
 import itertools
 from functools import reduce
@@ -16,6 +16,14 @@ def solve_brutal():
   upper_bound = 987654321
   pandigital_primes = list(filter(is_pandigital, takewhile(lambda x: x <= upper_bound, primes())))
   print(pandigital_primes[-1])
+
+def solve_with_sieve():
+  # Still too slow
+  primes = sieve(10**9)
+  print("done with sieve")
+  for p in primes[::-1]:
+    if is_pandigital(p):
+      return p
 
 def solve_with_permutations():
   # Go through all possible pandigital numbers from largest to smallest
