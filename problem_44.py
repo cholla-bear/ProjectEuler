@@ -18,6 +18,8 @@ def smallest_diff():
     for j in range(i - 1, 0, -1):
       diff = pent(i) - pent(j)
       if smallest_d and diff > smallest_d:
+        # all further pairs with this value of i will have a
+        # diff larger than smallest_d
         break
       add = pent(i) + pent(j)
       if not is_pentagonal(diff) or not is_pentagonal(add):
