@@ -15,7 +15,7 @@ def smallest_diff():
   for i in count(1):
     if upper_i and i > upper_i:
       break
-    for j in range(i, 0, -1):
+    for j in range(i - 1, 0, -1):
       diff = pent(i) - pent(j)
       if smallest_d and diff > smallest_d:
         break
