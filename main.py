@@ -3,6 +3,6 @@ start_time = datetime.now()
 
 print("Starting")
 
-import scratch.cache_example
+import problem_49
 
 print("Execution time: {}".format(datetime.now() - start_time))
