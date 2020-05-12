@@ -9,13 +9,9 @@ n = len(primes)
 
 prime_sums = primes
 
-masked_primes = np.ma.concatenate([primes, np.ma.masked_all(n)])
-
 longest_prime_sum = 0
 
-for i in range(1, len(primes)):
-  if i % 1000 == 0:
-    print(i)
+for i in range(1, n):
   prime_sums = prime_sums[:n-i] + primes[i:]
   for x in prime_sums[prime_sums < max_prime]:
     if x in prime_set:
