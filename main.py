@@ -3,6 +3,6 @@ start_time = datetime.now()
 
 print("Starting")
 
-import problem_50
+import problem_51
 
 print("Execution time: {}".format(datetime.now() - start_time))

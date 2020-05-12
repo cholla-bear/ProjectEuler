@@ -7,6 +7,8 @@ primes = sieve(max_prime)
 prime_set = set(primes)
 n = len(primes)
 
+# This array will accumulate the sum of sequential
+# primes starting at the corresponding index
 prime_sums = primes
 
 longest_prime_sum = 0
