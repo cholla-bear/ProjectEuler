@@ -12,7 +12,7 @@ def replace_characters(s, c, indexes):
 def digit_masks(n):
   '''
   Generate masks of the form:
-  1123 -> ['x123', '1x23', 'xx23', '11x3', '112x'
+  1123 -> ['x123', '1x23', 'xx23', '11x3', '112x']
   '''
   n_str = str(n)
   masks = []
