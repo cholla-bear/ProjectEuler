@@ -1,20 +1,16 @@
 from lib.prime import sieve
 import networkx as nx
 from itertools import combinations, product
+from sympy.ntheory.primetest import isprime
 
-max_prime = 10**8
+max_prime = 10**5
 target_n = 5
 
 primes = sieve(max_prime)
 prime_set = set(primes)
 
-print("done computing primes")
-
-def is_prime(n):
-  return n in prime_set
-
 def is_concat_prime(n1, n2):
-  return is_prime(int(str(n1) + str(n2))) and is_prime(int(str(n2) + str(n1)))
+  return isprime(int(str(n1) + str(n2))) and isprime(int(str(n2) + str(n1)))
 
 G = nx.Graph()
 
