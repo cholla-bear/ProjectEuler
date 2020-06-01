@@ -26,6 +26,7 @@ def calculate():
         G.add_edge(p1, p2)
         edges_added += 1
     if edges_added >= target_n - 1:
+      # Hunt for a clique of size target_n by brute force
       neighbors = nx.neighbors(G, p1)
       for candidates in combinations(neighbors, target_n - 1):
         edges = [G.has_edge(*e) for e in combinations(candidates, 2)]
