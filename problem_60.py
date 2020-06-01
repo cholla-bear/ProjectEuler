@@ -1,5 +1,6 @@
 from lib.prime import sieve
 import networkx as nx
+from itertools import combinations, product
 
 max_prime = 10**8
 target_n = 5
@@ -19,13 +20,18 @@ G = nx.Graph()
 
 def calculate():
   for i, p1 in enumerate(primes[1:], 1):
+    edges_added = 0
     for p2 in primes[:i]:
       if is_concat_prime(p1, p2):
         G.add_edge(p1, p2)
-    cliques = nx.cliques_containing_node(G, p2)
-    for clique in cliques:
-      if len(clique) == target_n:
-        print("Found solution {} sum={}".format(clique, sum(clique)))
-        return
+        edges_added += 1
+    if edges_added >= target_n - 1:
+      neighbors = nx.neighbors(G, p1)
+      for candidates in combinations(neighbors, target_n - 1):
+        edges = [G.has_edge(*e) for e in combinations(candidates, 2)]
+        if all(edges):
+          solution = list(candidates) + [p1]
+          print("Found solution: {} sum={}".format(solution, sum(solution)))
+          return
 
 calculate()
