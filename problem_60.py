@@ -10,13 +10,17 @@ primes = sieve(max_prime)
 prime_set = set(primes)
 
 def is_concat_prime(n1, n2):
-  return isprime(int(str(n1) + str(n2))) and isprime(int(str(n2) + str(n1)))
+  return isprime(int(f"{n1}{n2}")) and isprime(int(f"{n2}{n1}"))
 
-G = nx.Graph()
-
-def calculate():
+def solve_with_graph():
+  G = nx.Graph()
+  min_sum = None
   for i, p1 in enumerate(primes[1:], 1):
     edges_added = 0
+    if i % 100 == 0:
+      print(f"Tested up to prime: {p1}")
+    if min_sum and p1 > min_sum:
+      return min_sum
     for p2 in primes[:i]:
       if is_concat_prime(p1, p2):
         G.add_edge(p1, p2)
@@ -28,7 +32,7 @@ def calculate():
         edges = [G.has_edge(*e) for e in combinations(candidates, 2)]
         if all(edges):
           solution = list(candidates) + [p1]
-          print("Found solution: {} sum={}".format(solution, sum(solution)))
-          return
+          print(f"Found candidate solution: {solution} sum={sum(solution)}")
+          min_sum = min(min_sum, sum(solution)) if min_sum else sum(solution)
 
-calculate()
+print(f"Best solution: {solve_with_graph()}")
